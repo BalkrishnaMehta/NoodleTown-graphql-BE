@@ -1,0 +1,49 @@
+{
+  "name": "noodletown",
+  "version": "1.0.0",
+  "description": "Online Food ordering API",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && node dist/server.js",
+    "build": "tsc",
+    "start": "npm run build && node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BalkrishnaMehta/NoodleTown-backend.git"
+  },
+  "author": "Balkrishna Mehta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BalkrishnaMehta/NoodleTown-backend/issues"
+  },
+  "homepage": "https://github.com/BalkrishnaMehta/NoodleTown-backend#readme",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@graphql-tools/graphql-file-loader": "^8.0.12",
+    "@graphql-tools/load": "^8.0.12",
+    "bcrypt": "^5.1.1",
+    "class-validator": "^0.14.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "fuse.js": "^7.0.0",
+    "graphql": "^16.10.0",
+    "graphql-type-json": "^0.3.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1",
+    "typeorm": "^0.3.20"
+  }
+}
