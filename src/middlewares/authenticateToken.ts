@@ -14,10 +14,17 @@ export const authenticateToken = (
 
   if (!token) return res.sendStatus(401);
 
-  jwt.verify(token, env.jwtAccessSecret!, (err, decoded) => {
-    if (err) return res.sendStatus(403);
+  jwt.verify(
+    token,
+    env.jwtAccessSecret!,
+    (
+      err: jwt.VerifyErrors | null,
+      decoded: string | jwt.JwtPayload | undefined
+    ) => {
+      if (err) return res.sendStatus(403);
 
-    req.user = decoded as JwtPayload;
-    next();
-  });
+      req.user = decoded as JwtPayload;
+      next();
+    }
+  );
 };

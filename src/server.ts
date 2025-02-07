@@ -58,6 +58,6 @@ app.use(
 
 await initializeDatabase();
 
-app.listen(env.port, () => {
+app.listen(env.port || 8080, () => {
   console.log(`Server running on port ${env.port}`);
 });

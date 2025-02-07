@@ -1,33 +1,32 @@
-import jwt from "jsonwebtoken";
+import jwt, { Secret, SignOptions } from "jsonwebtoken";
 import { Response } from "express";
 import { getConfig } from "./config.js";
 import cookieOptions from "./cookieOptions.js";
 
 const env = getConfig();
 
-export const generateToken = (
-  payload: object,
-  expiresIn: string,
-  secret: string
-): string => {
-  return jwt.sign(payload, secret, { expiresIn });
-};
-
-export const generateAuthTokens = (payload: {
+interface TokenPayload {
   id: string;
-}): {
-  accessToken: string;
-  refreshToken: string;
-} => {
-  const accessToken = generateToken(payload, "1m", env.jwtAccessSecret!);
-  const refreshToken = generateToken(payload, "30d", env.jwtRefreshSecret!);
+}
 
-  return { accessToken, refreshToken };
+export const generateToken = (
+  payload: TokenPayload,
+  expiresIn: string | number,
+  secret: Secret
+): string => {
+  const options: SignOptions = {
+    expiresIn: expiresIn as SignOptions["expiresIn"],
+  };
+  return jwt.sign(payload, secret, options);
 };
 
-export const setRefreshTokenCookie = (
-  res: Response,
-  refreshToken: string
-): void => {
+export const generateAuthTokens = (payload: TokenPayload) => {
+  return {
+    accessToken: generateToken(payload, "15m", env.jwtAccessSecret!),
+    refreshToken: generateToken(payload, "30d", env.jwtRefreshSecret!),
+  };
+};
+
+export const setRefreshTokenCookie = (res: Response, refreshToken: string) => {
   res.cookie("refreshToken", refreshToken, cookieOptions);
 };
